@@ -11,7 +11,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
     autoRefreshToken: true,
     persistSession: true,
-    detectSessionInUrl: false, // Disable for Electron
+    detectSessionInUrl: true, // Enable to handle OAuth callbacks
     storage: {
       getItem: (key) => {
         return localStorage.getItem(key)

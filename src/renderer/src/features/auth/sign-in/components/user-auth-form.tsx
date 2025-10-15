@@ -4,7 +4,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Link, useNavigate } from '@tanstack/react-router'
 import { Loader2, LogIn } from 'lucide-react'
 import { toast } from 'sonner'
-import { IconFacebook, IconGithub } from '@/assets/brand-icons'
 import { useAuthStore } from '@/stores/auth-store'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -18,8 +17,8 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { PasswordInput } from '@/components/password-input'
-import { supabase } from '@/lib/supabase'
 import { Google } from '@ridemountainpig/svgl-react'
+import { SignInWithOAuthButton } from '@/components/sign-in-with-oauth-button'
 
 const formSchema = z.object({
   email: z.email({
@@ -74,9 +73,9 @@ export function UserAuthForm({ className, redirectTo, ...props }: UserAuthFormPr
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email</FormLabel>
-              <FormControl>
+              <FormControl >
                 <Input placeholder="name@example.com" {...field} />
-              </FormControl>
+              </FormControl >
               <FormMessage />
             </FormItem>
           )}
@@ -87,9 +86,9 @@ export function UserAuthForm({ className, redirectTo, ...props }: UserAuthFormPr
           render={({ field }) => (
             <FormItem className="relative">
               <FormLabel>Password</FormLabel>
-              <FormControl>
+              <FormControl >
                 <PasswordInput placeholder="********" {...field} />
-              </FormControl>
+              </FormControl >
               <FormMessage />
               <Link
                 to="/forgot-password"
@@ -100,7 +99,7 @@ export function UserAuthForm({ className, redirectTo, ...props }: UserAuthFormPr
             </FormItem>
           )}
         />
-        <Button className="mt-2" disabled={isLoading}>
+        <Button className="mt-2"  type='submit' disabled={isLoading}>
           {isLoading ? <Loader2 className="animate-spin" /> : <LogIn />}
           Sign in
         </Button>
@@ -114,15 +113,14 @@ export function UserAuthForm({ className, redirectTo, ...props }: UserAuthFormPr
           </div>
         </div>
 
-        <Button
+        <SignInWithOAuthButton
           variant="outline"
           className="w-full text-foreground"
-          type="button"
           disabled={isLoading}
-          onClick={() => supabase.auth.signInWithOAuth({ provider: 'google' })}
+          provider="google"
         >
           <Google className="mr-2 h-4 w-4" /> Google
-        </Button>
+        </SignInWithOAuthButton>
       </form>
     </Form>
   )

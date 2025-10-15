@@ -142,6 +142,22 @@ export const useAuthStore = create<AuthState>()((set) => ({
   checkAuth: async () => {
     set({ isLoading: true })
     try {
+      // First, try to get the session from URL (for OAuth callbacks)
+      const { data: { session: urlSession }, error: urlError } = await supabase.auth.getSession()
+      
+      if (urlSession && urlSession.user) {
+        const authUser = toAuthUser(urlSession.user)
+        set({ user: authUser, session: urlSession, isLoading: false })
+        
+        // Clean up URL if it contains OAuth parameters
+        if (window.location.hash.includes('access_token') || window.location.search.includes('code')) {
+          window.history.replaceState({}, document.title, window.location.pathname)
+        }
+        
+        return
+      }
+
+      // If no session found, check if user is already logged in
       const { data: { session } } = await supabase.auth.getSession()
 
       if (session && session.user) {

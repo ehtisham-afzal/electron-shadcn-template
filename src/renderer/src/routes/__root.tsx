@@ -23,8 +23,23 @@ function RootComponent() {
 
   // Check authentication status and set up listener on app load
   useEffect(() => {
-    // Initial auth check
-    checkAuth()
+    // Handle OAuth callback on app load
+    const handleOAuthCallback = async () => {
+      const hashParams = new URLSearchParams(window.location.hash.substring(1))
+      const queryParams = new URLSearchParams(window.location.search)
+      
+      // Check if we have OAuth tokens in URL
+      if (hashParams.has('access_token') || queryParams.has('code')) {
+        // Supabase will handle this automatically with detectSessionInUrl: true
+        // Just wait a bit for it to process
+        await new Promise(resolve => setTimeout(resolve, 100))
+      }
+      
+      // Initial auth check
+      await checkAuth()
+    }
+
+    handleOAuthCallback()
 
     // Listen for auth state changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {

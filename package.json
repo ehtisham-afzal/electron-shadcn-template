@@ -28,6 +28,7 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@base-ui-components/react": "^1.0.0-beta.4",
     "@clerk/clerk-react": "^5.51.0",
     "@electron-toolkit/preload": "^3.0.2",
     "@electron-toolkit/utils": "^4.0.0",

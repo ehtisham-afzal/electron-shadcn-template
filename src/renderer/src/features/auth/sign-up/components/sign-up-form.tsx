@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from '@tanstack/react-router'
 import { toast } from 'sonner'
-import { Google } from "@ridemountainpig/svgl-react";
+import { Google } from "@ridemountainpig/svgl-react"
 import { useAuthStore } from '@/stores/auth-store'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { PasswordInput } from '@/components/password-input'
-import { supabase } from '@/lib/supabase'
+import { SignInWithOAuthButton } from '@/components/sign-in-with-oauth-button'
 
 const formSchema = z
   .object({
@@ -80,9 +80,9 @@ export function SignUpForm({
           render={({ field }) => (
             <FormItem>
               <FormLabel>Name</FormLabel>
-              <FormControl>
+              <FormControl >
                 <Input placeholder='John Doe' {...field} />
-              </FormControl>
+              </FormControl >
               <FormMessage />
             </FormItem>
           )}
@@ -93,9 +93,9 @@ export function SignUpForm({
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email</FormLabel>
-              <FormControl>
+              <FormControl >
                 <Input placeholder='name@example.com' {...field} />
-              </FormControl>
+              </FormControl >
               <FormMessage />
             </FormItem>
           )}
@@ -106,9 +106,9 @@ export function SignUpForm({
           render={({ field }) => (
             <FormItem>
               <FormLabel>Password</FormLabel>
-              <FormControl>
+              <FormControl >
                 <PasswordInput placeholder='********' {...field} />
-              </FormControl>
+              </FormControl >
               <FormMessage />
             </FormItem>
           )}
@@ -119,9 +119,9 @@ export function SignUpForm({
           render={({ field }) => (
             <FormItem>
               <FormLabel>Confirm Password</FormLabel>
-              <FormControl>
+              <FormControl >
                 <PasswordInput placeholder='********' {...field} />
-              </FormControl>
+              </FormControl >
               <FormMessage />
             </FormItem>
           )}
@@ -141,15 +141,14 @@ export function SignUpForm({
           </div>
         </div>
 
-          <Button
+          <SignInWithOAuthButton
             variant='outline'
             className='w-full text-foreground'
-            type='button'
             disabled={isLoading}
-            onClick={()=> supabase.auth.signInWithOAuth({ provider: 'google' })}
+            provider='google'
           >
             <Google className='mr-2 h-4 w-4' /> Google
-          </Button>
+          </SignInWithOAuthButton>
       </form>
     </Form>
   )
