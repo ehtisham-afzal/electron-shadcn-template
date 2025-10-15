@@ -2,8 +2,8 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
-// Initialize database on import
-import './db'
+// Import database utilities (don't auto-initialize)
+import { initializeUserDatabase, closeCurrentDatabase, getCurrentUserId } from './db'
 
 function createWindow(): void {
   // Create the browser window.
@@ -54,18 +54,55 @@ app.whenReady().then(() => {
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
 
+  // IPC handlers for user-specific database management
+  ipcMain.handle('db:initializeUser', async (_, userId: string) => {
+    try {
+      if (!userId) {
+        throw new Error('User ID is required to initialize database')
+      }
+      initializeUserDatabase(userId)
+      return { success: true, userId }
+    } catch (error) {
+      console.error('Error initializing user database:', error)
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error'
+      }
+    }
+  })
+
+  ipcMain.handle('db:closeUser', async () => {
+    try {
+      const userId = getCurrentUserId()
+      closeCurrentDatabase()
+      return { success: true, userId }
+    } catch (error) {
+      console.error('Error closing user database:', error)
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error'
+      }
+    }
+  })
+
+  ipcMain.handle('db:getCurrentUser', async () => {
+    return { userId: getCurrentUserId() }
+  })
+
   // Example IPC handlers for database operations
   // You can uncomment and modify these as needed:
   /*
-  import { db } from './db'
-  import { usersTable } from './db/schema'
+  import { getDatabase } from './db'
+  import { userPreferencesTable } from './db/schema'
   
-  ipcMain.handle('db:getUsers', async () => {
-    return await db.select().from(usersTable)
+  ipcMain.handle('db:getUserPreferences', async () => {
+    const db = getDatabase()
+    return await db.select().from(userPreferencesTable)
   })
   
-  ipcMain.handle('db:createUser', async (_, userData) => {
-    return await db.insert(usersTable).values(userData)
+  ipcMain.handle('db:createUserPreference', async (_, userData) => {
+    const db = getDatabase()
+    return await db.insert(userPreferencesTable).values(userData)
   })
   */
 

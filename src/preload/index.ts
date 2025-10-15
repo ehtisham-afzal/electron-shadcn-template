@@ -1,9 +1,13 @@
-import { contextBridge } from 'electron'
+import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 
 // Custom APIs for renderer
 const api = {
-  // Add custom APIs here as needed
+  db: {
+    initializeUser: (userId: string) => ipcRenderer.invoke('db:initializeUser', userId),
+    closeUser: () => ipcRenderer.invoke('db:closeUser'),
+    getCurrentUser: () => ipcRenderer.invoke('db:getCurrentUser')
+  }
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to
