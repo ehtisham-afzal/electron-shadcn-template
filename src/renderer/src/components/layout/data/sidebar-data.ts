@@ -19,33 +19,33 @@ import {
   MessagesSquare,
   ShieldCheck,
   AudioWaveform,
-  Command,
   GalleryVerticalEnd,
+  Signature
 } from 'lucide-react'
 import { type SidebarData } from '../types'
 
 export const sidebarData: SidebarData = {
   user: {
-    name: 'satnaing',
-    email: 'satnaingdev@gmail.com',
-    avatar: '/avatars/shadcn.jpg',
+    name: 'Ihtisham Afzal',
+    email: 'shaminterprise@gmail.com',
+    avatar: '/avatars/shadcn.jpg'
   },
   teams: [
     {
-      name: 'Shadcn Admin',
-      logo: Command,
-      plan: 'Vite + ShadcnUI',
+      name: 'Ledgerly',
+      logo: Signature,
+      plan: 'Professional'
     },
     {
       name: 'Acme Inc',
       logo: GalleryVerticalEnd,
-      plan: 'Enterprise',
+      plan: 'Enterprise'
     },
     {
       name: 'Acme Corp.',
       logo: AudioWaveform,
-      plan: 'Startup',
-    },
+      plan: 'Startup'
+    }
   ],
   navGroups: [
     {
@@ -54,30 +54,31 @@ export const sidebarData: SidebarData = {
         {
           title: 'Dashboard',
           url: '/',
-          icon: LayoutDashboard,
+          icon: LayoutDashboard
         },
         {
-          title: 'Tasks',
-          url: '/tasks',
-          icon: ListTodo,
-        },
-        {
-          title: 'Apps',
-          url: '/apps',
-          icon: Package,
+          title: 'Sale',
+          items: [
+            {
+              title: 'New Sale',
+              url: '/sales/new',
+              icon: ListTodo
+            }
+          ],
+          icon: Package
         },
         {
           title: 'Chats',
           url: '/chats',
           badge: '3',
-          icon: MessagesSquare,
+          icon: MessagesSquare
         },
         {
           title: 'Users',
           url: '/users',
-          icon: Users,
-        },
-      ],
+          icon: Users
+        }
+      ]
     },
     {
       title: 'Pages',
@@ -88,25 +89,25 @@ export const sidebarData: SidebarData = {
           items: [
             {
               title: 'Sign In',
-              url: '/sign-in',
+              url: '/sign-in'
             },
             {
               title: 'Sign In (2 Col)',
-              url: '/sign-in-2',
+              url: '/sign-in-2'
             },
             {
               title: 'Sign Up',
-              url: '/sign-up',
+              url: '/sign-up'
             },
             {
               title: 'Forgot Password',
-              url: '/forgot-password',
+              url: '/forgot-password'
             },
             {
               title: 'OTP',
-              url: '/otp',
-            },
-          ],
+              url: '/otp'
+            }
+          ]
         },
         {
           title: 'Errors',
@@ -115,31 +116,31 @@ export const sidebarData: SidebarData = {
             {
               title: 'Unauthorized',
               url: '/errors/unauthorized',
-              icon: Lock,
+              icon: Lock
             },
             {
               title: 'Forbidden',
               url: '/errors/forbidden',
-              icon: UserX,
+              icon: UserX
             },
             {
               title: 'Not Found',
               url: '/errors/not-found',
-              icon: FileX,
+              icon: FileX
             },
             {
               title: 'Internal Server Error',
               url: '/errors/internal-server-error',
-              icon: ServerOff,
+              icon: ServerOff
             },
             {
               title: 'Maintenance Error',
               url: '/errors/maintenance-error',
-              icon: Construction,
-            },
-          ],
-        },
-      ],
+              icon: Construction
+            }
+          ]
+        }
+      ]
     },
     {
       title: 'Other',
@@ -147,40 +148,41 @@ export const sidebarData: SidebarData = {
         {
           title: 'Settings',
           icon: Settings,
-          items: [
-            {
-              title: 'Profile',
-              url: '/settings',
-              icon: UserCog,
-            },
-            {
-              title: 'Account',
-              url: '/settings/account',
-              icon: Wrench,
-            },
-            {
-              title: 'Appearance',
-              url: '/settings/appearance',
-              icon: Palette,
-            },
-            {
-              title: 'Notifications',
-              url: '/settings/notifications',
-              icon: Bell,
-            },
-            {
-              title: 'Display',
-              url: '/settings/display',
-              icon: Monitor,
-            },
-          ],
+          url: '/settings'
+          // items: [
+          //   {
+          //     title: 'Profile',
+          //     url: '/settings',
+          //     icon: UserCog
+          //   },
+          //   {
+          //     title: 'Account',
+          //     url: '/settings/account',
+          //     icon: Wrench
+          //   },
+          //   {
+          //     title: 'Appearance',
+          //     url: '/settings/appearance',
+          //     icon: Palette
+          //   },
+          //   {
+          //     title: 'Notifications',
+          //     url: '/settings/notifications',
+          //     icon: Bell
+          //   },
+          //   {
+          //     title: 'Display',
+          //     url: '/settings/display',
+          //     icon: Monitor
+          //   }
+          // ]
         },
         {
           title: 'Help Center',
           url: '/help-center',
-          icon: HelpCircle,
-        },
-      ],
-    },
-  ],
+          icon: HelpCircle
+        }
+      ]
+    }
+  ]
 }

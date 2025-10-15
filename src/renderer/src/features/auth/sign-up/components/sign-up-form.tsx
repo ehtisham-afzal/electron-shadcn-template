@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from '@tanstack/react-router'
 import { toast } from 'sonner'
-import { IconFacebook, IconGithub } from '@/assets/brand-icons'
+import { Google } from "@ridemountainpig/svgl-react";
 import { useAuthStore } from '@/stores/auth-store'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { PasswordInput } from '@/components/password-input'
+import { supabase } from '@/lib/supabase'
 
 const formSchema = z
   .object({
@@ -140,24 +141,15 @@ export function SignUpForm({
           </div>
         </div>
 
-        <div className='grid grid-cols-2 gap-2'>
           <Button
             variant='outline'
-            className='w-full'
+            className='w-full text-foreground'
             type='button'
             disabled={isLoading}
+            onClick={()=> supabase.auth.signInWithOAuth({ provider: 'google' })}
           >
-            <IconGithub className='h-4 w-4' /> GitHub
+            <Google className='mr-2 h-4 w-4' /> Google
           </Button>
-          <Button
-            variant='outline'
-            className='w-full'
-            type='button'
-            disabled={isLoading}
-          >
-            <IconFacebook className='h-4 w-4' /> Facebook
-          </Button>
-        </div>
       </form>
     </Form>
   )

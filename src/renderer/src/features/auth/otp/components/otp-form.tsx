@@ -56,7 +56,7 @@ export function OtpForm({ className, email, type = 'signup', ...props }: OtpForm
       toast.success(result.message || 'Verification successful!')
       // Navigate based on type
       if (type === 'recovery') {
-        navigate({ to: '/sign-in' })
+        navigate({ to: '/sign-in-2' })
       } else {
         navigate({ to: '/' })
       }

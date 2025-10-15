@@ -8,7 +8,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu'
-import { SendHorizontal } from 'lucide-react'
+import { Settings2 } from 'lucide-react'
 
 type DataTableViewOptionsProps<TData> = {
   table: Table<TData>
@@ -25,7 +25,7 @@ export function DataTableViewOptions<TData>({
           size='sm'
           className='ms-auto hidden h-8 lg:flex'
         >
-          <SendHorizontal className='size-4' />
+          <Settings2 className='size-4' />
           View
         </Button>
       </DropdownMenuTrigger>

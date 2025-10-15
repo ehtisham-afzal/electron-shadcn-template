@@ -1,5 +1,5 @@
 import { type Row } from '@tanstack/react-table'
-import { DotSquare, Trash2, UserPen } from 'lucide-react'
+import {  EllipsisVertical, Trash2, UserPen } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -26,7 +26,7 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
             variant='ghost'
             className='data-[state=open]:bg-muted flex h-8 w-8 p-0'
           >
-            <DotSquare className='h-4 w-4' />
+            <EllipsisVertical className='h-4 w-4' />
             <span className='sr-only'>Open menu</span>
           </Button>
         </DropdownMenuTrigger>
