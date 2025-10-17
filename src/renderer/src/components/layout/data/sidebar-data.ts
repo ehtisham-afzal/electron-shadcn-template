@@ -60,8 +60,8 @@ export const sidebarData: SidebarData = {
           title: 'Sale',
           items: [
             {
-              title: 'New Sale',
-              url: '/sales/new',
+              title: 'New Invoice',
+              url: '/items/sale',
               icon: ListTodo
             }
           ],

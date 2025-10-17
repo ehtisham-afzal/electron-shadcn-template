@@ -32,7 +32,10 @@ import { Route as AuthenticatedSettingsNotificationsRouteImport } from './routes
 import { Route as AuthenticatedSettingsDisplayRouteImport } from './routes/_authenticated/settings/display'
 import { Route as AuthenticatedSettingsAppearanceRouteImport } from './routes/_authenticated/settings/appearance'
 import { Route as AuthenticatedSettingsAccountRouteImport } from './routes/_authenticated/settings/account'
+import { Route as AuthenticatedItemsSaleRouteImport } from './routes/_authenticated/items/sale'
+import { Route as AuthenticatedItemsPurchaseRouteImport } from './routes/_authenticated/items/purchase'
 import { Route as AuthenticatedErrorsErrorRouteImport } from './routes/_authenticated/errors/$error'
+import { Route as AuthenticatedItemsInvoicePreviewRouteImport } from './routes/_authenticated/items/invoice/preview'
 
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
@@ -155,10 +158,27 @@ const AuthenticatedSettingsAccountRoute =
     path: '/account',
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
   } as any)
+const AuthenticatedItemsSaleRoute = AuthenticatedItemsSaleRouteImport.update({
+  id: '/items/sale',
+  path: '/items/sale',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedItemsPurchaseRoute =
+  AuthenticatedItemsPurchaseRouteImport.update({
+    id: '/items/purchase',
+    path: '/items/purchase',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedErrorsErrorRoute =
   AuthenticatedErrorsErrorRouteImport.update({
     id: '/errors/$error',
     path: '/errors/$error',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedItemsInvoicePreviewRoute =
+  AuthenticatedItemsInvoicePreviewRouteImport.update({
+    id: '/items/invoice/preview',
+    path: '/items/invoice/preview',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
@@ -176,6 +196,8 @@ export interface FileRoutesByFullPath {
   '/503': typeof errors503Route
   '/': typeof AuthenticatedIndexRoute
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
+  '/items/purchase': typeof AuthenticatedItemsPurchaseRoute
+  '/items/sale': typeof AuthenticatedItemsSaleRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayRoute
@@ -186,6 +208,7 @@ export interface FileRoutesByFullPath {
   '/settings/': typeof AuthenticatedSettingsIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
+  '/items/invoice/preview': typeof AuthenticatedItemsInvoicePreviewRoute
 }
 export interface FileRoutesByTo {
   '/forgot-password': typeof authForgotPasswordRoute
@@ -200,6 +223,8 @@ export interface FileRoutesByTo {
   '/503': typeof errors503Route
   '/': typeof AuthenticatedIndexRoute
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
+  '/items/purchase': typeof AuthenticatedItemsPurchaseRoute
+  '/items/sale': typeof AuthenticatedItemsSaleRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayRoute
@@ -210,6 +235,7 @@ export interface FileRoutesByTo {
   '/settings': typeof AuthenticatedSettingsIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
+  '/items/invoice/preview': typeof AuthenticatedItemsInvoicePreviewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -227,6 +253,8 @@ export interface FileRoutesById {
   '/(errors)/503': typeof errors503Route
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/errors/$error': typeof AuthenticatedErrorsErrorRoute
+  '/_authenticated/items/purchase': typeof AuthenticatedItemsPurchaseRoute
+  '/_authenticated/items/sale': typeof AuthenticatedItemsSaleRoute
   '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/_authenticated/settings/display': typeof AuthenticatedSettingsDisplayRoute
@@ -237,6 +265,7 @@ export interface FileRoutesById {
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
+  '/_authenticated/items/invoice/preview': typeof AuthenticatedItemsInvoicePreviewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -254,6 +283,8 @@ export interface FileRouteTypes {
     | '/503'
     | '/'
     | '/errors/$error'
+    | '/items/purchase'
+    | '/items/sale'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
@@ -264,6 +295,7 @@ export interface FileRouteTypes {
     | '/settings/'
     | '/tasks'
     | '/users'
+    | '/items/invoice/preview'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/forgot-password'
@@ -278,6 +310,8 @@ export interface FileRouteTypes {
     | '/503'
     | '/'
     | '/errors/$error'
+    | '/items/purchase'
+    | '/items/sale'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
@@ -288,6 +322,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/tasks'
     | '/users'
+    | '/items/invoice/preview'
   id:
     | '__root__'
     | '/_authenticated'
@@ -304,6 +339,8 @@ export interface FileRouteTypes {
     | '/(errors)/503'
     | '/_authenticated/'
     | '/_authenticated/errors/$error'
+    | '/_authenticated/items/purchase'
+    | '/_authenticated/items/sale'
     | '/_authenticated/settings/account'
     | '/_authenticated/settings/appearance'
     | '/_authenticated/settings/display'
@@ -314,6 +351,7 @@ export interface FileRouteTypes {
     | '/_authenticated/settings/'
     | '/_authenticated/tasks/'
     | '/_authenticated/users/'
+    | '/_authenticated/items/invoice/preview'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -493,11 +531,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsAccountRouteImport
       parentRoute: typeof AuthenticatedSettingsRouteRoute
     }
+    '/_authenticated/items/sale': {
+      id: '/_authenticated/items/sale'
+      path: '/items/sale'
+      fullPath: '/items/sale'
+      preLoaderRoute: typeof AuthenticatedItemsSaleRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/items/purchase': {
+      id: '/_authenticated/items/purchase'
+      path: '/items/purchase'
+      fullPath: '/items/purchase'
+      preLoaderRoute: typeof AuthenticatedItemsPurchaseRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/errors/$error': {
       id: '/_authenticated/errors/$error'
       path: '/errors/$error'
       fullPath: '/errors/$error'
       preLoaderRoute: typeof AuthenticatedErrorsErrorRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/items/invoice/preview': {
+      id: '/_authenticated/items/invoice/preview'
+      path: '/items/invoice/preview'
+      fullPath: '/items/invoice/preview'
+      preLoaderRoute: typeof AuthenticatedItemsInvoicePreviewRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
   }
@@ -530,22 +589,28 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedSettingsRouteRoute: typeof AuthenticatedSettingsRouteRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedErrorsErrorRoute: typeof AuthenticatedErrorsErrorRoute
+  AuthenticatedItemsPurchaseRoute: typeof AuthenticatedItemsPurchaseRoute
+  AuthenticatedItemsSaleRoute: typeof AuthenticatedItemsSaleRoute
   AuthenticatedAppsIndexRoute: typeof AuthenticatedAppsIndexRoute
   AuthenticatedChatsIndexRoute: typeof AuthenticatedChatsIndexRoute
   AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
   AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
   AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
+  AuthenticatedItemsInvoicePreviewRoute: typeof AuthenticatedItemsInvoicePreviewRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSettingsRouteRoute: AuthenticatedSettingsRouteRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedErrorsErrorRoute: AuthenticatedErrorsErrorRoute,
+  AuthenticatedItemsPurchaseRoute: AuthenticatedItemsPurchaseRoute,
+  AuthenticatedItemsSaleRoute: AuthenticatedItemsSaleRoute,
   AuthenticatedAppsIndexRoute: AuthenticatedAppsIndexRoute,
   AuthenticatedChatsIndexRoute: AuthenticatedChatsIndexRoute,
   AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
   AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
   AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
+  AuthenticatedItemsInvoicePreviewRoute: AuthenticatedItemsInvoicePreviewRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
