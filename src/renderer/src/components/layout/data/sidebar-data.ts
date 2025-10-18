@@ -84,20 +84,20 @@ export const sidebarData: SidebarData = {
       title: 'Pages',
       items: [
         {
-          title: 'Auth',
+          title: 'Items',
           icon: ShieldCheck,
           items: [
             {
-              title: 'Sign In',
-              url: '/sign-in'
+              title: 'Items Categories',
+              url: '/categories'
             },
             {
-              title: 'Sign In (2 Col)',
-              url: '/sign-in-2'
+              title: 'Products',
+              url: '/products'
             },
             {
-              title: 'Sign Up',
-              url: '/sign-up'
+              title: 'Suppliers',
+              url: '/suppliers'
             },
             {
               title: 'Forgot Password',

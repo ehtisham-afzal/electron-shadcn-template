@@ -33,8 +33,11 @@ export function runMigrations(db: Database.Database): void {
 
     console.log('Migrations folder:', migrationsFolder)
 
-    // Run migrations
-    migrate(drizzleDb, { migrationsFolder })
+    // Run migrations with explicit migrations table
+    migrate(drizzleDb, { 
+      migrationsFolder,
+      migrationsTable: '__drizzle_migrations'
+    })
 
     console.log('Database migrations completed successfully')
   } catch (error) {

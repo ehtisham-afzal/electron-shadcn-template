@@ -15,6 +15,13 @@
       "when": 1760468544332,
       "tag": "0001_cool_korvac",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1760767025639,
+      "tag": "0002_lush_marauders",
+      "breakpoints": true
     }
   ]
 }

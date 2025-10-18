@@ -60,16 +60,6 @@ export const useAuthStore = create<AuthState>()((set) => ({
       if (data.user && data.session) {
         const authUser = toAuthUser(data.user)
         
-        // Initialize user-specific database
-        try {
-          const dbResult = await window.api.db.initializeUser(data.user.id)
-          if (!dbResult.success) {
-            console.error('Failed to initialize user database:', dbResult.error)
-          }
-        } catch (dbError) {
-          console.error('Database initialization error:', dbError)
-        }
-        
         set({
           user: authUser,
           session: data.session,
@@ -114,16 +104,6 @@ export const useAuthStore = create<AuthState>()((set) => ({
         if (data.session) {
           const authUser = toAuthUser(data.user)
           
-          // Initialize user-specific database
-          try {
-            const dbResult = await window.api.db.initializeUser(data.user.id)
-            if (!dbResult.success) {
-              console.error('Failed to initialize user database:', dbResult.error)
-            }
-          } catch (dbError) {
-            console.error('Database initialization error:', dbError)
-          }
-          
           set({
             user: authUser,
             session: data.session,
@@ -153,16 +133,6 @@ export const useAuthStore = create<AuthState>()((set) => ({
   logout: async () => {
     set({ isLoading: true })
     try {
-      // Close user-specific database before signing out
-      try {
-        const dbResult = await window.api.db.closeUser()
-        if (!dbResult.success) {
-          console.error('Failed to close user database:', dbResult.error)
-        }
-      } catch (dbError) {
-        console.error('Database cleanup error:', dbError)
-      }
-      
       await supabase.auth.signOut()
       set({ user: null, session: null, isLoading: false })
     } catch (error) {
@@ -180,16 +150,6 @@ export const useAuthStore = create<AuthState>()((set) => ({
       if (urlSession && urlSession.user) {
         const authUser = toAuthUser(urlSession.user)
         
-        // Initialize user-specific database
-        try {
-          const dbResult = await window.api.db.initializeUser(urlSession.user.id)
-          if (!dbResult.success) {
-            console.error('Failed to initialize user database:', dbResult.error)
-          }
-        } catch (dbError) {
-          console.error('Database initialization error:', dbError)
-        }
-        
         set({ user: authUser, session: urlSession, isLoading: false })
         
         // Clean up URL if it contains OAuth parameters
@@ -205,16 +165,6 @@ export const useAuthStore = create<AuthState>()((set) => ({
 
       if (session && session.user) {
         const authUser = toAuthUser(session.user)
-        
-        // Initialize user-specific database
-        try {
-          const dbResult = await window.api.db.initializeUser(session.user.id)
-          if (!dbResult.success) {
-            console.error('Failed to initialize user database:', dbResult.error)
-          }
-        } catch (dbError) {
-          console.error('Database initialization error:', dbError)
-        }
         
         set({ user: authUser, session, isLoading: false })
       } else {
@@ -315,10 +265,6 @@ export const useAuthStore = create<AuthState>()((set) => ({
   },
 
   reset: () => {
-    // Close database connection when resetting auth state
-    window.api.db.closeUser().catch(error => {
-      console.error('Error closing database on reset:', error)
-    })
     set({ user: null, session: null, isLoading: false })
   }
 }))
